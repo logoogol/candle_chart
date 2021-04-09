@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif'] = ['STHeiti'] 
 # from matplotlib import font_manager
 # from matplotlib.font_manager import FontProperties
 # matplotlib.rc('font', family='SimHei')
@@ -138,9 +137,9 @@ mc = mpf.make_marketcolors(up='r',down='g',
                            volume={'up':'red','down':'green'},
                            ohlc='black')
 s  = mpf.make_mpf_style(marketcolors=mc)
-s  = mpf.make_mpf_style(marketcolors=mc, rc={'font.family':'sans-serif','font.sans-serif':'SimHei'})
+# s  = mpf.make_mpf_style(marketcolors=mc, rc={'font.family':'sans-serif','font.sans-serif':'SimHei'})
 
-dlm = mpf.plot(df, type='candle', ylabel='Price', title="K线图", volume=True, mav=(10,30), style=s)
+dlm = mpf.plot(df, type='candle', ylabel='', title="", volume=True, mav=(10,30), style=s)
 st.pyplot(dlm)
 
 # indicator_bb = BollingerBands(df['Close'])
