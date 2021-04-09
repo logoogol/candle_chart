@@ -4,9 +4,10 @@ import pandas as pd
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib import font_manager
-from matplotlib.font_manager import FontProperties
-matplotlib.rc('font', family='SimHei')
+plt.rcParams['font.sans-serif'] = ['STHeiti'] 
+# from matplotlib import font_manager
+# from matplotlib.font_manager import FontProperties
+# matplotlib.rc('font', family='SimHei')
 import pathlib, os
 import yfinance as yf # https://pypi.org/project/yfinance/
 from ta.volatility import BollingerBands
@@ -138,7 +139,7 @@ mc = mpf.make_marketcolors(up='r',down='g',
                            ohlc='black')
 s  = mpf.make_mpf_style(marketcolors=mc, rc={'font.family':'sans-serif','font.sans-serif':'SimHei'})
 
-dlm = mpf.plot(df, type='candle', ylabel='Price', title="Candlestick", volume=True, mav=(10,30), style=s)
+dlm = mpf.plot(df, type='candle', ylabel='Price', title="K线图", volume=True, mav=(10,30), style=s)
 st.pyplot(dlm)
 
 # indicator_bb = BollingerBands(df['Close'])
