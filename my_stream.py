@@ -2,10 +2,11 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
 from matplotlib.font_manager import FontProperties
-# matplotlib.rc('font', family='SimHei')
+matplotlib.rc('font', family='SimHei')
 import pathlib, os
 import yfinance as yf # https://pypi.org/project/yfinance/
 from ta.volatility import BollingerBands
