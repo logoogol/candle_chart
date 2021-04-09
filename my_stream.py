@@ -14,7 +14,6 @@ from ta.trend import MACD
 from ta.momentum import RSIIndicator
 import streamlit.components.v1 as components
 import mplfinance as mpf
-from pandas_datareader import data
 
 
 # components.iframe("http://www.greatchinarenaissance.com/")
@@ -100,7 +99,7 @@ else:
 import datetime
 
 today = datetime.date.today()
-before = today - datetime.timedelta(days=700)
+before = today - datetime.timedelta(days=200)
 start_date = st.sidebar.date_input('选择起始日', before)
 end_date = st.sidebar.date_input('选择截止日', today)
 if start_date < end_date:
@@ -129,7 +128,6 @@ else:
 # https://technical-analysis-library-in-python.readthedocs.io/en/latest/ta.html#momentum-indicators
 
 df = yf.download(x,start= start_date,end= end_date, progress=False)
-ds = data.DataReader(x,'yahoo', start_date,end_date)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
@@ -140,7 +138,7 @@ mc = mpf.make_marketcolors(up='r',down='g',
                            ohlc='black')
 s  = mpf.make_mpf_style(marketcolors=mc, rc={'font.family':'sans-serif','font.sans-serif':'SimHei'})
 
-dlm = mpf.plot(ds, type='candle', ylabel='Price', title="Candlestick", volume=True, mav=(10,30), style=s)
+dlm = mpf.plot(df, type='candle', ylabel='Price', title="Candlestick", volume=True, mav=(10,30), style=s)
 st.pyplot(dlm)
 
 # indicator_bb = BollingerBands(df['Close'])
@@ -168,7 +166,7 @@ rsi = RSIIndicator(df['Close']).rsi()
 # https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py
 
 st.write('指数平滑移动平均线 (MACD)')
-st.area_chart(macd)
+st.bar_chart(macd)
 
 st.write('强弱指数 RSI ')
 st.line_chart(rsi)
