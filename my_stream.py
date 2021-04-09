@@ -3,6 +3,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import font_manager
+from matplotlib.font_manager import FontProperties
+# matplotlib.rc('font', family='SimHei')
 import pathlib, os
 import yfinance as yf # https://pypi.org/project/yfinance/
 from ta.volatility import BollingerBands
@@ -11,6 +14,7 @@ from ta.momentum import RSIIndicator
 import streamlit.components.v1 as components
 import mplfinance as mpf
 from pandas_datareader import data
+
 
 # components.iframe("http://www.greatchinarenaissance.com/")
 
@@ -133,7 +137,7 @@ mc = mpf.make_marketcolors(up='r',down='g',
                            wick={'up':'blue','down':'orange'},
                            volume={'up':'red','down':'green'},
                            ohlc='black')
-s  = mpf.make_mpf_style(marketcolors=mc, rc={'font.family' : 'Noto Sans CJK SC' })
+s  = mpf.make_mpf_style(marketcolors=mc, rc={'font.family':'sans-serif','font.sans-serif':'SimHei'})
 
 dlm = mpf.plot(ds, type='candle', ylabel='价格', title="K线图", volume=True, mav=(10,30), style=s)
 st.pyplot(dlm)
