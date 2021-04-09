@@ -140,7 +140,7 @@ mc = mpf.make_marketcolors(up='r',down='g',
                            ohlc='black')
 s  = mpf.make_mpf_style(marketcolors=mc, rc={'font.family':'sans-serif','font.sans-serif':'SimHei'})
 
-dlm = mpf.plot(ds, type='candle', ylabel='价格', title="K线图", volume=True, mav=(10,30), style=s)
+dlm = mpf.plot(ds, type='candle', ylabel='Price', title="Candlestick", volume=True, mav=(10,30), style=s)
 st.pyplot(dlm)
 
 # indicator_bb = BollingerBands(df['Close'])
