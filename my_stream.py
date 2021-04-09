@@ -69,7 +69,7 @@ import mplfinance as mpf
 BASE_DIR = pathlib.Path(__file__).parent
 st.sidebar.write("股票分析网站")
 st.sidebar.write("开发者：东海宽客")
-stock_ticker = st.sidebar.text_input("点击下方输入股票代码")
+stock_ticker = st.sidebar.text_input("点击下方输入股票代码或股票简称")
 st.sidebar.button("提交")
 ticker_name = pd.read_pickle(os.path.join(BASE_DIR, "ticker_name_k"))
 if stock_ticker in ticker_name['ticker'].tolist():
