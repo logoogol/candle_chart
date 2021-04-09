@@ -133,7 +133,7 @@ mc = mpf.make_marketcolors(up='r',down='g',
                            wick={'up':'blue','down':'orange'},
                            volume={'up':'red','down':'green'},
                            ohlc='black')
-s  = mpf.make_mpf_style(marketcolors=mc, rc={'font.family':'sans-serif','font.sans-serif':'SimHei'})
+s  = mpf.make_mpf_style(marketcolors=mc, rc={'font.family' : 'Noto Sans CJK SC' })
 
 dlm = mpf.plot(ds, type='candle', ylabel='价格', title="K线图", volume=True, mav=(10,30), style=s)
 st.pyplot(dlm)
