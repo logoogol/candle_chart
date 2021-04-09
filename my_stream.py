@@ -101,8 +101,8 @@ import datetime
 
 today = datetime.date.today()
 before = today - datetime.timedelta(days=700)
-start_date = st.sidebar.date_input('起始日', before)
-end_date = st.sidebar.date_input('截止日', today)
+start_date = st.sidebar.date_input('选择起始日', before)
+end_date = st.sidebar.date_input('选择截止日', today)
 if start_date < end_date:
     st.sidebar.success('起始日: `%s`\n\n截止日:`%s`' % (start_date, end_date))
 else:
