@@ -14,6 +14,7 @@ from ta.trend import MACD
 from ta.momentum import RSIIndicator
 import streamlit.components.v1 as components
 import mplfinance as mpf
+from PIL import Image
 
 
 # components.iframe("http://www.greatchinarenaissance.com/")
@@ -66,12 +67,34 @@ import mplfinance as mpf
 #option = st.sidebar.selectbox('请输入股票代码', ( '000651.sz','AAPL', 'MSFT',"SPY",'WMT'))
 
 ##
+st.markdown(
+    """
+<style>
+.big-font {
+    font-size:30px !important;
+    bold;
+}
+.small-font {
+    font-size:13px !important;
+    color:blue
+}
+.sidebar .sidebar-content {
+    background-image: linear-gradient(#2e7bcf,#2e7bcf);
+    color: white;
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
 BASE_DIR = pathlib.Path(__file__).parent
-st.sidebar.write("股票分析网站")
-st.sidebar.write("开发者：东海宽客")
+img = Image.open(os.path.join(BASE_DIR, "ticker_name", "logo_shuianbotan.png"))
+st.sidebar.image(img, caption='',use_column_width=True)
+st.sidebar.markdown('<p class="big-font">股票分析站</p>', unsafe_allow_html=True)
+st.sidebar.markdown('<p class="small-font">开发者：东海宽客</p>', unsafe_allow_html=True)
+# st.sidebar.write("开发者：东海宽客")
 stock_ticker = st.sidebar.text_input("点击下方输入股票代码或股票简称")
 st.sidebar.button("提交")
-ticker_name = pd.read_pickle(os.path.join(BASE_DIR, "ticker_name_k"))
+ticker_name = pd.read_pickle(os.path.join(BASE_DIR, "ticker_name","ticker_name_k"))
 if stock_ticker in ticker_name['ticker'].tolist():
     name = ticker_name.loc[ticker_name['ticker']==stock_ticker, 'name'].values[0]
     # st.write(name)

@@ -6,3 +6,4 @@ yfinance==0.1.59
 ta==0.7.0
 mplfinance==0.12.7a10
 pandas-datareader==0.9.0rc1
+pillow==8.2.0
