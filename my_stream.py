@@ -87,13 +87,13 @@ st.markdown(
     unsafe_allow_html=True,
 )
 BASE_DIR = pathlib.Path(__file__).parent
-img = Image.open(os.path.join(BASE_DIR, "ticker_name", "logo_shuianbotan.png"))
-st.sidebar.image(img, caption='',use_column_width=True)
-st.sidebar.markdown('<p class="big-font">股票分析站</p>', unsafe_allow_html=True)
-st.sidebar.markdown('<p class="small-font">开发者：东海宽客</p>', unsafe_allow_html=True)
+img = Image.open(os.path.join(BASE_DIR, "ticker_name", "宽惠logo.jpg"))
+st.sidebar.image(img, caption='')
+# st.sidebar.markdown('<p class="big-font">股票分析站</p>', unsafe_allow_html=True)
+# st.sidebar.markdown('<p class="small-font">开发者：东海宽客</p>', unsafe_allow_html=True)
 # st.sidebar.write("开发者：东海宽客")
 stock_ticker = st.sidebar.text_input("点击下方输入股票代码或股票简称")
-st.sidebar.button("提交")
+st.sidebar.button("提交",)
 ticker_name = pd.read_pickle(os.path.join(BASE_DIR, "ticker_name","ticker_name_k"))
 if stock_ticker in ticker_name['ticker'].tolist():
     name = ticker_name.loc[ticker_name['ticker']==stock_ticker, 'name'].values[0]
@@ -113,7 +113,8 @@ elif stock_ticker in ticker_name['name'].tolist():
     #st.write(stock_ticker)
     st.markdown(f'{name}', unsafe_allow_html=True,)
 else:
-    st.sidebar.write("尚未输入或输入有误，请重新输入")
+    # st.sidebar.write("(尚未输入或输入有误，请重新输入)")
+    st.sidebar.markdown('<p class="small-font">(尚未输入或输入有误，请重新输入)</p>', unsafe_allow_html=True)
     x = "600309.ss"
 #option = st.sidebar.selectbox('请输入股票代码', ('AAPL', 'MSFT',"SPY",'WMT'))
 ##
