@@ -92,7 +92,7 @@ st.sidebar.image(img, caption='')
 # st.sidebar.markdown('<p class="big-font">股票分析站</p>', unsafe_allow_html=True)
 # st.sidebar.markdown('<p class="small-font">开发者：东海宽客</p>', unsafe_allow_html=True)
 # st.sidebar.write("开发者：东海宽客")
-stock_ticker = st.sidebar.text_input("点击下方输入股票代码或股票简称")
+stock_ticker = st.sidebar.text_input("点击下方输入股票代码或股票简称", '000001')
 st.sidebar.button("提交",)
 ticker_name = pd.read_pickle(os.path.join(BASE_DIR, "ticker_name","ticker_name_k"))
 if stock_ticker in ticker_name['ticker'].tolist():
@@ -114,8 +114,8 @@ elif stock_ticker in ticker_name['name'].tolist():
     st.markdown(f'{name}', unsafe_allow_html=True,)
 else:
     # st.sidebar.write("(尚未输入或输入有误，请重新输入)")
-    st.sidebar.markdown('<p class="small-font">(尚未输入或输入有误，请重新输入)</p>', unsafe_allow_html=True)
-    x = "600309.ss"
+    #st.sidebar.markdown('<p class="small-font">(尚未输入或输入有误，请重新输入)</p>', unsafe_allow_html=True)
+    x = " "
 #option = st.sidebar.selectbox('请输入股票代码', ('AAPL', 'MSFT',"SPY",'WMT'))
 ##
 
@@ -151,51 +151,55 @@ else:
 
 # https://technical-analysis-library-in-python.readthedocs.io/en/latest/ta.html#momentum-indicators
 
-df = yf.download(x,start= start_date,end= end_date, progress=False)
-st.set_option('deprecation.showPyplotGlobalUse', False)
+try:
+    df = yf.download(x,start= start_date,end= end_date, progress=False)
+
+    st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
-mc = mpf.make_marketcolors(up='r',down='g',
-                           edge='i',
-                           wick={'up':'blue','down':'orange'},
-                           volume={'up':'red','down':'green'},
-                           ohlc='black')
-s  = mpf.make_mpf_style(marketcolors=mc)
-# s  = mpf.make_mpf_style(marketcolors=mc, rc={'font.family':'sans-serif','font.sans-serif':'SimHei'})
+    mc = mpf.make_marketcolors(up='r',down='g',
+                            edge='i',
+                            wick={'up':'blue','down':'orange'},
+                            volume={'up':'red','down':'green'},
+                            ohlc='black')
+    s  = mpf.make_mpf_style(marketcolors=mc)
+    # s  = mpf.make_mpf_style(marketcolors=mc, rc={'font.family':'sans-serif','font.sans-serif':'SimHei'})
 
-dlm = mpf.plot(df, type='candle', ylabel='', title="", volume=True, mav=(10,30), style=s)
-st.pyplot(dlm)
+    dlm = mpf.plot(df, type='candle', ylabel='', title="", volume=True, mav=(10,30), style=s)
+    st.pyplot(dlm)
 
-# indicator_bb = BollingerBands(df['Close'])
+    # indicator_bb = BollingerBands(df['Close'])
 
-# bb = df
-# bb['bb_h'] = indicator_bb.bollinger_hband()
-# bb['bb_l'] = indicator_bb.bollinger_lband()
-# bb = bb[['Close','bb_h','bb_l']]
+    # bb = df
+    # bb['bb_h'] = indicator_bb.bollinger_hband()
+    # bb['bb_l'] = indicator_bb.bollinger_lband()
+    # bb = bb[['Close','bb_h','bb_l']]
 
-macd = MACD(df['Close']).macd()
+    macd = MACD(df['Close']).macd()
 
-rsi = RSIIndicator(df['Close']).rsi()
+    rsi = RSIIndicator(df['Close']).rsi()
 
 
-###################
-# Set up main app #
-###################
+    ###################
+    # Set up main app #
+    ###################
 
-# st.write('Stock Bollinger Bands')
+    # st.write('Stock Bollinger Bands')
 
-# st.line_chart(bb)
+    # st.line_chart(bb)
 
-# progress_bar = st.progress(0)
+    # progress_bar = st.progress(0)
 
-# https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py
+    # https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py
 
-st.write('指数平滑移动平均线 (MACD)')
-st.bar_chart(macd)
+    st.write('指数平滑移动平均线 (MACD)')
+    st.bar_chart(macd)
 
-st.write('强弱指数 RSI ')
-st.line_chart(rsi)
+    st.write('强弱指数 RSI ')
+    st.line_chart(rsi)
 
+except:
+    st.write("输入信息有新输入误，请重新输入")
 
 # st.write('Recent data ')
 # st.dataframe(df.tail(10))
