@@ -200,6 +200,5 @@ try:
 
 except:
     st.write("输入信息有新输入误，请重新输入")
-
 # st.write('Recent data ')
 # st.dataframe(df.tail(10))
